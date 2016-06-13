@@ -7,44 +7,13 @@ class Api::ImagesController < ApplicationController
   end
 
   def create
-    result = { status: "failed" }
+    image = current_user_api.images.new(file: params[:file])
 
-    begin
-      params[:image] = parse_image_data(params[:image]) if params[:image]
-      item = Item.new
-      item.image = params[:image]
-
-      if item.save
-        result[:status] = "success"
-      end
-    rescue Exception => e
-      Rails.logger.error "#{e.message}"
-    end
-
-    render json: result.to_json
-  ensure
-    clean_tempfile
-  end
-
-  def parse_image_data(image_data)
-    @tempfile = Tempfile.new('item_image')
-    @tempfile.binmode
-    @tempfile.write Base64.decode64(image_data[:content])
-    @tempfile.rewind
-
-    uploaded_file = ActionDispatch::Http::UploadedFile.new(
-      tempfile: @tempfile,
-      filename: image_data[:filename]
-    )
-
-    uploaded_file.content_type = image_data[:content_type]
-    uploaded_file
-  end
-
-  def clean_tempfile
-    if @tempfile
-      @tempfile.close
-      @tempfile.unlink
+    if image.save
+      render json: {status: 0, message: 'success'}
+    else
+      render json: {status: 1, message: 'error'}
     end
   end
+
 end

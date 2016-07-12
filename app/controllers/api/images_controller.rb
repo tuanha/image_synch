@@ -10,9 +10,9 @@ class Api::ImagesController < ApplicationController
     image = current_user_api.images.new(file: params[:file])
 
     if image.save
-      render json: {status: 1, message: 'success'}
+      render json: {status: 1, message_success: 'success'}
     else
-      render json: {status: 0, message: image.errors.full_messages}
+      render json: {status: 0, message_errors: image.errors.full_messages}
     end
   end
 

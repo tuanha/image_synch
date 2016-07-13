@@ -26,5 +26,5 @@ production:
   database: c0imagesync
   username: c0imagesync
   password: kcm@YNgICNo5
-  host: 192.168.1.101
+  host: 127.0.0.1
   port: 3306

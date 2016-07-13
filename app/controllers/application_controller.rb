@@ -16,6 +16,10 @@ class ApplicationController < ActionController::Base
     render json: { errors: 'Not Authenticated' }, status: :unauthorized
   end
 
+  def after_sign_in_path_for(resource_or_scope)
+   "/admin"
+  end
+
   private
 
   def http_token

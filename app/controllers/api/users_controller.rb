@@ -9,9 +9,9 @@ class Api::UsersController < ApplicationController
         user.generate_reset_password_token
         Notifier.generate_reset_password_token( user ).deliver
 
-        format.json { render json: { status: "success"} , status: :ok }
+        format.json { render json: { status: "success"} }
       else
-        format.json { render json: { status: 'error' }, status: :unprocessable_entity }
+        format.json { render json: { status: 'error' } }
       end
     end
   end

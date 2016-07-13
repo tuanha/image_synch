@@ -7,8 +7,18 @@
   <%= csrf_meta_tags %>
 </head>
 <body class="container">
-
-<%= yield %>
+  <div id="navbar" class="navbar-collapse collapse">
+    <ul class="nav navbar-nav navbar-right">
+      <li>
+        <% if user_signed_in? %>
+          <%= link_to "Sign Out", destroy_user_session_path, method: :delete %>
+        <% else %>
+          <%= link_to "Sign In", new_user_session_path %>
+        <% end %>
+      </li>
+    </ul>
+  </div><!--/.nav-collapse -->
+  <%= yield %>
 
 </body>
 </html>

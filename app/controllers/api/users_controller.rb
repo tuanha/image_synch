@@ -9,9 +9,9 @@ class Api::UsersController < ApplicationController
         user.generate_reset_password_token
         Notifier.generate_reset_password_token( user ).deliver
 
-        format.json { render json: { status: "success"} }
+        format.json { render json: { status: 1} }
       else
-        format.json { render json: { status: 'error' } }
+        format.json { render json: { status: 0 } }
       end
     end
   end
@@ -19,13 +19,13 @@ class Api::UsersController < ApplicationController
   def reset_password
     user = User.find_by(reset_password_token: params[:token])
 
-    render json: { status: 'error', message: "Your token in invaild" } and return unless user.present?
+    render json: { status: 0, message_errors: "Your token in invaild" } and return unless user.present?
 
     if user.reset_password(params[:password], params[:password_confirmation])
       user.clear_password_token
-      render json: { status: 'success' }
+      render json: { status: 1 }
     else
-      render json: { status: 'error', errors: custom_errors(user)}
+      render json: { status: 0, message_errors: custom_errors(user)}
     end
   end
 

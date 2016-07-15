@@ -6,7 +6,7 @@ class AuthenticationController < ApplicationController
     if user && user.valid_password?(params[:password])
       render json: payload(user)
     else
-      render json: {status: 0, errors: 'Invalid Username/Password'}, status: :unauthorized
+      render json: {status: 0, message_errors: 'Invalid Username/Password'}, status: :unauthorized
     end
   end
 

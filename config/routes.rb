@@ -16,6 +16,8 @@ Rails.application.routes.draw do
     get "images" => "images#index"
     post 'images' => "images#create"
 
+    post 'devices' => "devices#create"
+
     post 'users/forgot_password', to: "users#forgot_password", as: :forgot_password, :defaults => { :format => 'json' }
     post 'users/reset_password', to: "users#reset_password", as: :reset_password, :defaults => { :format => 'json' }
 

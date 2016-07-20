@@ -30,6 +30,7 @@ gem 'rails_admin_rollincode', '~> 1.0'
 gem 'rails_admin'
 gem "paperclip"
 gem 'jwt'
+gem 'gcm'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

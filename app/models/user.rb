@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :images, dependent: :destroy
+  has_many :devices, dependent: :destroy
 
   def generate_reset_password_token
     password_token = loop do

@@ -13,8 +13,7 @@ Rails.application.routes.draw do
   post 'api/authenticate_user' => "authentication#authenticate_user"
 
   namespace :api do
-    get "images" => "images#index"
-    post 'images' => "images#create"
+    resources :images, only: [:index, :create, :destroy]
 
     post 'devices' => "devices#create"
 
